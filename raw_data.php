@@ -4,8 +4,7 @@
 require("functions.php");
 $timezones = array();
 
-
-header('Content-Type: application/json; charset=utf-8');
+//header('Content-Type: application/json; charset=utf-8');
 $jsonurl = "http://wefeel.csiro.au/api/zones/continents/europe/timezones";
 $json = file_get_contents($jsonurl);
 $content = json_decode($json, true);
@@ -25,7 +24,7 @@ foreach($timezones as $city){
 	$days = json_decode($json, true);
 	$dayCount=0;
 	foreach($days as $day => $value){
-		$date = new DateTime($value['start']);
+		$date = new DateTime($value['localStart']['start']);
 		$city->addDay($dayCount, new Day($date->format('d/m/Y')));
 			
 		foreach($value['counts'] as $feeling => $count){
@@ -60,8 +59,8 @@ $analyse->setMaxMinSentimentIndex(0, $classCalc[0]['max'], $classCalc[0]['min'])
 $analyse->setMaxMinSentimentIndex(1, $classCalc[1]['max'], $classCalc[1]['min']);
 $analyse->setMaxMinSentimentIndex(2, $classCalc[2]['max'], $classCalc[2]['min']);
 
-echo(json_encode($analyse));
-
+echo("Daten wurden neu geladen. <a href='index.html'>Zur&uuml;k zur Tabelle</a>");
+file_put_contents ( 'data.json' , json_encode($analyse) );
 
 
 	//var_dump ($cont);
