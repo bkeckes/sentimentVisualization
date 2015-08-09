@@ -27,11 +27,12 @@ class Timezone {
 	}
 }
 class Day {
-    var $feelings;
+    var $feelings = array();
+	
 	var $time;
 	
-    function addFeeling($name, $num) {
-        $this->feelings[$name] = $num;
+    function addFeeling($index, $num) {
+        $this->feelings[$index] += $num;
     }
 	
 	function getFeeling($name){
@@ -43,6 +44,9 @@ class Day {
 	}
 	function Day($time){
 		$this->time=$time;
+		$this->feelings['positive'] = 0;
+		$this->feelings['negative'] = 0;
+		$this->feelings['neutral'] = 0;
 	}
 	
 }
@@ -64,17 +68,19 @@ class ClassCalculator{
 	var $max;
 	
 }
-
+//0 positiv
+//1 negativ
+//2 neutral
 function transformFeeling($key){
 	switch($key){
-		case "joy": return "positive";
-		case "love": return "positive";
-		case "*": return "neutral";
-		case "surprise": return "positive";
-		case "anger": return "negative";
-		case "other": return "neutral";
-		case "sadness": return "negative";
-		case "fear": return "negative";
+		case "joy": return 'positive';
+		case "love": return 'positive';
+		case "*": return 'neutral';
+		case "surprise": return 'positive';
+		case "anger": return 'negative';
+		case "other": return 'neutral';
+		case "sadness": return 'negative';
+		case "fear": return 'negative';
 		default: return $key;
 	}
 }
