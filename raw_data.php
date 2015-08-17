@@ -2,6 +2,7 @@
 
 
 require("functions.php");
+date_default_timezone_set('Europe/Berlin');
 $timezones = array();
 
 //header('Content-Type: application/json; charset=utf-8');

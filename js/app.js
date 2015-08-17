@@ -62,7 +62,7 @@ var app = angular.module('emotionApp', ['ngRoute'])
       };
 	  $scope.change = function() {
 		//remove all circles
-		for(var i=0; i<37; i++)
+		for(var i=0; i<$scope.circleCount; i++)
 			map.removeLayer($scope.circle[i])
 		
 		angular.forEach($scope.timezones, function(value, key) {
