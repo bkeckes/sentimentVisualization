@@ -17,21 +17,13 @@ var app = angular.module('emotionApp', ['ngRoute'])
   .controller('siteController', function($scope, $http, Emotion) {
 	$http.get('data.json').then(function(articlesResponse) {
       $scope.timezones = articlesResponse.data.timezones;
-	  $scope.maxSentiment = articlesResponse.data.maxSentimentIndex;
-	  $scope.minSentiment = articlesResponse.data.minSentimentIndex;
-	  
 	  $scope.maxSentiment = getMaxValue(articlesResponse.data.maxSentimentIndex);
 	  $scope.minSentiment = getMinValue(articlesResponse.data.minSentimentIndex);
-	  
-	  angular.forEach($scope.timezones, function(value, key) {
-		//$scope.timezones
-		
+	  angular.forEach($scope.timezones, function(value, key) {		
 		for(var $i=0; $i<3; $i++){
 			value.days[$i].sentimentIndex = value.days[$i].feelings['positive'] / value.days[$i].feelings['negative'];
 			value.days[$i].sentimentClass = getColor($scope.maxSentiment, $scope.minSentiment, value.days[$i].sentimentIndex);
-			//console.log('Tag('+$i+'): MinIndex: '+$scope.minSentiment+ ', MaxIndex: '+$scope.maxSentiment);
 		}
-	
 	  });
     });
 	$scope.addCircle = function($city, $color, $index){
@@ -76,26 +68,29 @@ var app = angular.module('emotionApp', ['ngRoute'])
     })
 
   ;
-  function ctrl($scope){
-    $scope.getDisplayName = function(columnName) {        
-        return 'abc';
-    };
-}
-app.directive('abcOption', function($compile,$timeout) {
-    return {
-        restrict : 'asd',
-        template : '<div class="filter-content">ssss</div>',
-        replace : true,
-        scope : {
-            callBackMethod:'&getDisplayName'
-        },
-        link: function(scope,element,attrs){            
-            /* send an object to the function */
-            console.log(scope.callBackMethod({columnName:"hurray"}));           
-        }
-    };
-});
+ // function ctrl($scope){
+    // $scope.getDisplayName = function(columnName) {        
+        // return 'abc';
+    // };
+// }
+// app.directive('abcOption', function($compile,$timeout) {
+    // return {
+        // restrict : 'asd',
+        // template : '<div class="filter-content">ssss</div>',
+        // replace : true,
+        // scope : {
+            // callBackMethod:'&getDisplayName'
+        // },
+        // link: function(scope,element,attrs){            
+            // /* send an object to the function */
+            // console.log(scope.callBackMethod({columnName:"hurray"}));           
+        // }
+    // };
+// });
   
+/**
+	Aus Performancegruenden hart codiert.
+**/
 function getLocation($city, $index){
 	
 	var lat=0, lng=0;

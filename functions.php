@@ -40,6 +40,8 @@ class Day {
 	}
 	
 	function getSentimentIndex(){
+		if($this->feelings['positive']==0 || $this->feelings['negative']==0)
+			return 0;
 		return round($this->feelings['positive'] / $this->feelings['negative'],3);
 	}
 	function Day($time){
