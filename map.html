@@ -79,8 +79,10 @@
 		</div>	
 		<div ng-repeat="zone in timezones"><div ng-init="addCircle(zone.id, zone.days[day.index].sentimentClass, zone.days[day.index].sentimentIndex)"></div></div>
       
-	<div class="range">
-		La
+	<div style="margin-top:10px;">
+		Maximalwerte aller drei Tage:<br>
+		geringste Zufriedenheit: {{minSentiment}}<br>
+		h&ouml;chste Zufriedenheit: {{maxSentiment}}
 	</div>
 	
 	
