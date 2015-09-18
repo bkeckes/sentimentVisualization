@@ -21,7 +21,7 @@ var app = angular.module('emotionApp', ['ngRoute'])
 	  $scope.minSentiment = getMinValue(articlesResponse.data.minSentimentIndex);
 	  angular.forEach($scope.timezones, function(value, key) {		
 		for(var $i=0; $i<3; $i++){
-			value.days[$i].sentimentIndex = value.days[$i].feelings['positive'] / value.days[$i].feelings['negative'];
+			value.days[$i].sentimentIndex = value.days[$i].feelings['positive'] / (value.days[$i].feelings['negative'] + 0.01);
 			value.days[$i].sentimentClass = getColor($scope.maxSentiment, $scope.minSentiment, value.days[$i].sentimentIndex);
 		}
 	  });
